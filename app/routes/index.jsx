@@ -1,10 +1,7 @@
 import { useLoaderData } from 'remix'
 import { db } from '~/utils/db.server'
 
-import { createTurn } from '~/turn'
-
 export const loader = async () => {
-  console.log(db)
   const data = await db.user.findMany({
     select: {
       id: true,
@@ -18,28 +15,9 @@ export const loader = async () => {
     },
   })
 
-  console.log(data)
-
   return data
 }
 
-
-
-const markCRDone = async (user) => {
-        debugger
-        console.log(db)
-      await db.turn.create({
-        data: {
-          userId: user.id
-        }
-      })
-    return
-//   return createTurn(user)
-  // make sure order is always more than number of people
-  const numberOfNames = names.length
-
-  return (name.order = name.order + numberOfNames)
-}
 
 const sortNames = (userA, userB) => {
   const turnA = userA.turn[0] || {id: 0}
