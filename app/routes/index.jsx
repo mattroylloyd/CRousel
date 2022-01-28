@@ -1,25 +1,11 @@
-import { useLoaderData } from "remix";
+import { useLoaderData } from 'remix'
+import { db } from '~/utils/db.server'
 
-export const loader = () => {
-    return [
-        {
-            id:1,
-            name: "Nelly",
-            order: 3
-        },
-        {
-            id: 2,
-            name: "Pat",
-            order: 2
-        },
-        {
-            id: 3,
-            name: "Roy",
-            order: 1
-        }
+export const loader = async () => {
+  const data = await db.user.findMany()
 
-    ];
-};
+  return data
+}
 
 const markCRDone = (names, name) => {
     // make sure order is always more than number of people
